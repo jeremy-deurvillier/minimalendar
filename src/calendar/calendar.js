@@ -149,6 +149,28 @@ export default function Calendar({ interval }) {
     setMonth((oldYear) => parseInt(e.target.value));
   }
 
+  /* ** Affiche les jours de la semaine.
+   * Seule les 2 premières lettres du jour sont affichées.
+   *
+   * @return JSX Un rendu contenant la liste des jours de la semaine.
+   */
+  function getWeekDay() {
+    let options = { weekday: 'long' };
+    let currentDay = 1;
+    let date, day;
+
+    const list = []; // Liste des jours de la semaine
+
+    for (; currentDay < 8; currentDay++) {
+      date = new Date(1989, 0, currentDay); // 1 janvier 1989
+      day = i18n(date, options);
+
+      list.push(<span key={currentDay}>{day.substring(0, 2)}</span>);
+    }
+
+    return list;
+  }
+
   // Rendu
   return (
     <div className="calendar">
@@ -171,7 +193,7 @@ export default function Calendar({ interval }) {
             </button>
           </div>
         </div>
-        <div className="dayList"></div>
+        <div className="dayList">{getWeekDay()}</div>
       </div>
       <div className="calendarBody"></div>
     </div>
