@@ -72,18 +72,108 @@ export default function Calendar({ interval }) {
     setNextBtnDisabled(month === 11 && year === Math.max(...interval));
   }, [month, year, interval]);
 
+  /* ** Renvoie le nom du jour ou du mois dans la locale par défaut du navigateur.
+   * Utilise l'objet Intl.
+   *
+   * @param Date date Un objet date dont on veut récupérer soit le jour, soit le mois.
+   * @param Object options Un objet indiquant la valeur qu'on souhaite recevoir (soit le mois, soit le jour).
+   *
+   * @return String Le mois ou le jour demandé.
+   */
+  function i18n(date, options) {
+    let lang = navigator.language;
+
+    return new Intl.DateTimeFormat(lang, options).format(date);
+  }
+
+  /* ** Définit tous les mois d'une année.
+   *
+   * @return JSX Un rendu contenant la liste des mois dans des balises HTML "option".
+   */
+  function getMonthList() {
+    let options = { month: 'long' };
+    let currentMonth = 0;
+    let date, month;
+
+    const list = []; // Liste des mois
+
+    for (; currentMonth < 12; currentMonth++) {
+      date = new Date(today.getFullYear(), currentMonth, 1);
+      month = i18n(date, options);
+
+      list.push(
+        <option key={currentMonth} value={currentMonth}>
+          {month}
+        </option>
+      );
+    }
+
+    return list;
+  }
+
+  /* ** Change le mois affiché.
+   *
+   * @param Event e Un événement JS.
+   */
+  function changeMonth(e) {
+    setMonth((oldMonth) => parseInt(e.target.value));
+  }
+
+  /* ** Définit toutes les années dans l'intervalle (propriété interval).
+   *
+   * @return JSX Un rendu contenant une liste d'années dans des balises HTML "option".
+   */
+  function getYearList() {
+    let start = Math.min(...interval);
+    let max = Math.max(...interval);
+    let index = 0;
+
+    const list = []; // Liste des années dans une intervalle.
+
+    for (; start + index <= max; index++) {
+      list.push(
+        <option key={index} value={start + index}>
+          {start + index}
+        </option>
+      );
+    }
+
+    return list;
+  }
+
+  /* ** Change l'année affichée.
+   *
+   * @param Event e Un événement JS.
+   */
+  function changeYear(e) {
+    setMonth((oldYear) => parseInt(e.target.value));
+  }
+
   // Rendu
   return (
-    <div>
-      <p>
-        {month + 1} {year}
-      </p>
-      <button type="button" onClick={prevMonth} disabled={prevBtnDisabled}>
-        prev
-      </button>
-      <button type="button" onClick={nextMonth} disabled={nextBtnDisabled}>
-        next
-      </button>
+    <div className="calendar">
+      <div className="calendarHeader">
+        <div className="navigation">
+          <div>
+            <select value={month} onChange={changeMonth}>
+              {getMonthList()}
+            </select>
+            <select value={year} onChange={changeYear}>
+              {getYearList()}
+            </select>
+          </div>
+          <div>
+            <button onClick={prevMonth} disabled={prevBtnDisabled}>
+              {'<'}
+            </button>
+            <button onClick={nextMonth} disabled={nextBtnDisabled}>
+              {'>'}
+            </button>
+          </div>
+        </div>
+        <div className="dayList"></div>
+      </div>
+      <div className="calendarBody"></div>
     </div>
   );
 }
