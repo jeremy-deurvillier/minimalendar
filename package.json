@@ -1,6 +1,7 @@
 {
-  "name": "react",
-  "version": "0.0.0",
+  "name": "minimalendar",
+  "description": "A minimalist calendar with React.",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "react": "^18.1.0",
