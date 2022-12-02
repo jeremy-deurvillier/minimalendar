@@ -13,7 +13,7 @@ import React, { useState, useEffect } from 'react';
  *
  * @param Array interval Une intervalle représentant la période qu'on veut affichée.
  */
-export default function Calendar({ interval }) {
+export default function Calendar({ interval, getData }) {
   let today = new Date(); // Date du jour
 
   /* ** Les années dans la propriété interval sont-elles inférieur (inf) et/ou supérieur (sup)
@@ -34,6 +34,9 @@ export default function Calendar({ interval }) {
   // Etat des boutons "mois suivant" et "mois précédent".
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
+
+  // Date sélectionnée
+  const [selectedDate, setSelectedDate] = useState(null);
 
   /* ** Décrémente le mois actuel de 1.
    * Passe à l'année précédente si le mois de janvier est affiché.
@@ -171,6 +174,43 @@ export default function Calendar({ interval }) {
     return list;
   }
 
+  /* ** Affiche les jours du mois.
+   *
+   * @return JSX Un rendu contenant les jours du mois à afficher.
+   */
+  function getDayOfMonth() {
+    let day = 1;
+    let date = new Date(year, month, day);
+
+    const list = []; // Liste des jours du mois
+
+    while (date.getMonth() === month) {
+      list.push(
+        <span key={date.getDate()} onClick={changeSelectedDate}>
+          {date.getDate()}
+        </span>
+      );
+
+      day++;
+      date = new Date(year, month, day);
+    }
+
+    return list;
+  }
+
+  /* ** Modifie la date sélectionnée.
+   * Appel le callback utilisateur s'il est défini.
+   *
+   * @param Event e Un événement JS.
+   */
+  function changeSelectedDate(e) {
+    let selectedDay = parseInt(e.target.innerHTML);
+
+    setSelectedDate((oldSelectedDate) => new Date(year, month, selectedDay));
+
+    if (getData) getData(selectedDate);
+  }
+
   // Rendu
   return (
     <div className="calendar">
@@ -195,7 +235,7 @@ export default function Calendar({ interval }) {
         </div>
         <div className="dayList">{getWeekDay()}</div>
       </div>
-      <div className="calendarBody"></div>
+      <div className="calendarBody">{getDayOfMonth()}</div>
     </div>
   );
 }
