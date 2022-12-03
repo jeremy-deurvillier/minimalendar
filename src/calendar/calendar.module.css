@@ -1,0 +1,69 @@
+.calendar{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.calendarHeader{
+  order: 0;
+  flex: 0 1 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.navigation{
+  order: 0;
+  flex: 0 1 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.navigation > div:first-child{
+  order: 0;
+  flex: 0 1 70vw;
+}
+
+.navigation > div:last-child{
+  text-align: right;
+  order: 1;
+  flex: 0 1 30vw;
+  
+}
+
+.dayList{
+  order: 1;
+  flex: 0 1 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.dayList > span{
+  text-align: center;
+  flex: 0 1 calc(100vw / 7);
+}
+
+.calendarBody{
+  order: 1;
+  flex: 0 1 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.calendarBody > span{
+  text-align: center;
+  flex: 0 1 calc(100vw / 7);
+}

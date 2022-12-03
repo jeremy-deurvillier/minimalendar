@@ -9,6 +9,8 @@
 
 import React, { useState, useEffect } from 'react';
 
+import css from './calendar.module.css';
+
 /* ** Fonction composant React.
  *
  * @param Array interval Une intervalle représentant la période qu'on veut affichée.
@@ -213,9 +215,9 @@ export default function Calendar({ interval, getData }) {
 
   // Rendu
   return (
-    <div className="calendar">
-      <div className="calendarHeader">
-        <div className="navigation">
+    <div className={css.calendar}>
+      <div className={css.calendarHeader}>
+        <div className={css.navigation}>
           <div>
             <select value={month} onChange={changeMonth}>
               {getMonthList()}
@@ -233,9 +235,9 @@ export default function Calendar({ interval, getData }) {
             </button>
           </div>
         </div>
-        <div className="dayList">{getWeekDay()}</div>
+        <div className={css.dayList}>{getWeekDay()}</div>
       </div>
-      <div className="calendarBody">{getDayOfMonth()}</div>
+      <div className={css.calendarBody}>{getDayOfMonth()}</div>
     </div>
   );
 }
