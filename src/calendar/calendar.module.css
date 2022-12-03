@@ -2,9 +2,10 @@
   color: #fff;
   background-color: #000;
   max-width: 315px;
+  min-height: 360px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
   align-content: stretch;
   border-radius: 10px;
@@ -49,12 +50,13 @@ select {
   padding: 5px;
 }
 
-select:hover{
-  background: linear-gradient(45deg, #E8BD70, #EDD185);
+select:hover {
+  color: #000;
+  background: linear-gradient(45deg, #e8bd70, #edd185);
 }
 
 option {
-  color: #fff;
+  color: #000;
 }
 
 .navigation > div:last-child {
@@ -138,6 +140,11 @@ button:disabled {
   align-content: center;
   vertical-align: bottom;
   padding: 6px;
+}
+
+.calendarBody > div > .today {
+  color: #000;
+  background: linear-gradient(45deg, #e8bd70, #edd185);
 }
 
 .calendarBody > div > span:hover {

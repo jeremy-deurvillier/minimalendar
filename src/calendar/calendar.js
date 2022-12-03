@@ -5,10 +5,6 @@
  * Option pour sélectionner le mois
  * Option pour sélectionner l'année
  * Lors du clic sur une date, renvoie la date cliquée via un callback.
- *
- * TODO :
- *  - décalage sur les premiers jours du mois.
- *  - styles CSS
  */
 
 import React, { useState, useEffect } from 'react';
@@ -155,7 +151,7 @@ export default function Calendar({ interval, getData }) {
    * @param Event e Un événement JS.
    */
   function changeYear(e) {
-    setMonth((oldYear) => parseInt(e.target.value));
+    setYear((oldYear) => parseInt(e.target.value));
   }
 
   /* ** Affiche les jours de la semaine.
@@ -180,6 +176,21 @@ export default function Calendar({ interval, getData }) {
     return list;
   }
 
+  /* ** Calcul le décalage au début d'un mois.
+   */
+  function startMonthShift(gapNumber) {
+    let index = 0;
+    const list = [];
+
+    while (index < gapNumber) {
+      list.push(<div key={'gap-' + index}></div>);
+
+      index += 1;
+    }
+
+    return list;
+  }
+
   /* ** Affiche les jours du mois.
    *
    * @return JSX Un rendu contenant les jours du mois à afficher.
@@ -187,13 +198,17 @@ export default function Calendar({ interval, getData }) {
   function getDayOfMonth() {
     let day = 1;
     let date = new Date(year, month, day);
+    let gapStartMonth = startMonthShift(date.getDay());
 
     const list = []; // Liste des jours du mois
 
     while (date.getMonth() === month) {
       list.push(
         <div key={date.getDate()} onClick={changeSelectedDate}>
-          <span>{date.getDate()}</span>
+          {(date.getTime() === today.getTime())
+          ?<span className={css.today}>{date.getDate()}</span>
+          :<span>{date.getDate()}</span>
+          }
         </div>
       );
 
@@ -201,7 +216,7 @@ export default function Calendar({ interval, getData }) {
       date = new Date(year, month, day);
     }
 
-    return list;
+    return [...gapStartMonth, ...list];
   }
 
   /* ** Modifie la date sélectionnée.
@@ -248,5 +263,6 @@ export default function Calendar({ interval, getData }) {
 
 // Propriétés par défaut.
 Calendar.defaultProps = {
-  interval: [new Date().getFullYear()],
+  //interval: [new Date().getFullYear()]
+  interval: [2020, 2025]
 };
