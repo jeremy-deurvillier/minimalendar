@@ -49,6 +49,10 @@ select {
   padding: 5px;
 }
 
+select:hover{
+  background: linear-gradient(45deg, #E8BD70, #EDD185);
+}
+
 option {
   color: #fff;
 }
@@ -72,7 +76,7 @@ button {
   margin: 0 5px;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   color: #000;
   background: linear-gradient(45deg, #e8bd70, #edd185);
 }
