@@ -1,4 +1,6 @@
 .calendar {
+  color: #FFF;
+  background-color: #222;
   max-width: 315px;
   display: flex;
   flex-flow: column nowrap;
@@ -36,10 +38,15 @@
 
 select {
   text-transform: capitalize;
-  background-color: transparent;
+  color: #FFF;
+  background-color: #222;
   border: 1px solid transparent;
   cursor: pointer;
   margin: 0 5px;
+}
+
+option{
+  color: #FFF;
 }
 
 .navigation > div:last-child {
@@ -50,6 +57,7 @@ select {
 
 button {
   font-size: 1.1em;
+  color: #FFF;
   background-color: transparent;
   border: 1px solid transparent;
   cursor: pointer;
