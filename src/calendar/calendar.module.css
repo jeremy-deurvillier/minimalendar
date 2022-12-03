@@ -142,12 +142,8 @@ button:disabled {
   padding: 6px;
 }
 
+.calendarBody > div > span:hover,
 .calendarBody > div > .today {
-  color: #000;
-  background: linear-gradient(45deg, #e8bd70, #edd185);
-}
-
-.calendarBody > div > span:hover {
   color: #000;
   background: linear-gradient(45deg, #e8bd70, #edd185);
   cursor: pointer;

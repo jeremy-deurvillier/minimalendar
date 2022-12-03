@@ -177,6 +177,10 @@ export default function Calendar({ interval, getData }) {
   }
 
   /* ** Calcul le décalage au début d'un mois.
+   *
+   * @param Integer gapNumber Le nombre de jour à décaler vers la droite.
+   *
+   * @return JSX Un tableau d'éléments div correspondant au décalage.
    */
   function startMonthShift(gapNumber) {
     let index = 0;
@@ -189,6 +193,20 @@ export default function Calendar({ interval, getData }) {
     }
 
     return list;
+  }
+
+  /* ** Indique si une date est la date du jour.
+   *
+   * @param Date dateTest Une date à tester.
+   *
+   * @return Boolean Renvoie true si c'est la date du jour, false sinon.
+   */
+  function isToday(dateTest) {
+    let year = dateTest.getFullYear() === today.getFullYear();
+    let month = dateTest.getMonth() === today.getMonth();
+    let day = dateTest.getDate() === today.getDate();
+
+    return year && month && day;
   }
 
   /* ** Affiche les jours du mois.
@@ -205,10 +223,11 @@ export default function Calendar({ interval, getData }) {
     while (date.getMonth() === month) {
       list.push(
         <div key={date.getDate()} onClick={changeSelectedDate}>
-          {(date.getTime() === today.getTime())
-          ?<span className={css.today}>{date.getDate()}</span>
-          :<span>{date.getDate()}</span>
-          }
+          {isToday(date) ? (
+            <span className={css.today}>{date.getDate()}</span>
+          ) : (
+            <span>{date.getDate()}</span>
+          )}
         </div>
       );
 
@@ -264,5 +283,5 @@ export default function Calendar({ interval, getData }) {
 // Propriétés par défaut.
 Calendar.defaultProps = {
   //interval: [new Date().getFullYear()]
-  interval: [2020, 2025]
+  interval: [2020, 2025],
 };
