@@ -5,6 +5,10 @@
  * Option pour sélectionner le mois
  * Option pour sélectionner l'année
  * Lors du clic sur une date, renvoie la date cliquée via un callback.
+ *
+ * TODO :
+ *  - décalage sur les premiers jours du mois.
+ *  - styles CSS
  */
 
 import React, { useState, useEffect } from 'react';
