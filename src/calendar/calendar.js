@@ -192,9 +192,9 @@ export default function Calendar({ interval, getData }) {
 
     while (date.getMonth() === month) {
       list.push(
-        <span key={date.getDate()} onClick={changeSelectedDate}>
-          {date.getDate()}
-        </span>
+        <div key={date.getDate()} onClick={changeSelectedDate}>
+          <span>{date.getDate()}</span>
+        </div>
       );
 
       day++;

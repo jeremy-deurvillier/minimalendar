@@ -1,12 +1,13 @@
 .calendar {
-  color: #FFF;
-  background-color: #222;
+  color: #fff;
+  background-color: #000;
   max-width: 315px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: stretch;
   align-content: stretch;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -38,15 +39,18 @@
 
 select {
   text-transform: capitalize;
-  color: #FFF;
-  background-color: #222;
+  color: #fff;
+  background-color: #000;
+  height: 27px;
   border: 1px solid transparent;
+  border-radius: 10px;
   cursor: pointer;
   margin: 0 5px;
+  padding: 5px;
 }
 
-option{
-  color: #FFF;
+option {
+  color: #fff;
 }
 
 .navigation > div:last-child {
@@ -57,11 +61,25 @@ option{
 
 button {
   font-size: 1.1em;
-  color: #FFF;
+  text-align: center;
+  color: #fff;
   background-color: transparent;
+  width: 32px;
+  height: 32px;
   border: 1px solid transparent;
+  border-radius: 100%;
   cursor: pointer;
   margin: 0 5px;
+}
+
+button:hover {
+  color: #000;
+  background: linear-gradient(45deg, #e8bd70, #edd185);
+}
+
+button:disabled {
+  color: #888;
+  cursor: not-allowed;
 }
 
 .dayList {
@@ -72,7 +90,6 @@ button {
   justify-content: flex-start;
   align-items: stretch;
   align-content: stretch;
-  padding: 15px 0;
 }
 
 .dayList > span {
@@ -92,13 +109,35 @@ button {
   padding-top: 10px;
 }
 
-.calendarBody > span {
+.calendarBody > div {
   text-align: center;
   width: calc(100% / 7);
   height: 45px;
   flex: 0 1 calc(100% / 7);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
-.calendarBody > span:hover {
-  background-color: #222;
+.calendarBody > div > span {
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  flex: 0 1 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  vertical-align: bottom;
+  padding: 6px;
+}
+
+.calendarBody > div > span:hover {
+  color: #000;
+  background: linear-gradient(45deg, #e8bd70, #edd185);
+  cursor: pointer;
 }
