@@ -38,7 +38,8 @@ export default function Calendar({ interval, getData }) {
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
   // Date sélectionnée
-  const [selectedDate, setSelectedDate] = useState(null);
+  let defaultSelectedDate = {date:null, day:null, month:null, year:null}
+  const [selectedDate, setSelectedDate] = useState(defaultSelectedDate);
 
   /* ** Décrémente le mois actuel de 1.
    * Passe à l'année précédente si le mois de janvier est affiché.
@@ -244,11 +245,26 @@ export default function Calendar({ interval, getData }) {
    * @param Event e Un événement JS.
    */
   function changeSelectedDate(e) {
-    let selectedDay = parseInt(e.target.innerHTML);
+    let stringValue = e.target.innerHTML.match(/[0-9]+/i);
+    let selectedDay = parseInt(stringValue);
 
-    setSelectedDate((oldSelectedDate) => new Date(year, month, selectedDay));
+    let options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
 
-    if (getData) getData(selectedDate);
+    let newSelectedDate = {
+      date:  i18n(new Date(year, month, selectedDay), options),
+      day: selectedDay,
+      month: month,
+      year: year
+    }
+
+    setSelectedDate((oldSelectedDate) => newSelectedDate);
+
+    if (getData) getData(newSelectedDate);
   }
 
   // Rendu
