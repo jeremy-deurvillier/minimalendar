@@ -5,6 +5,10 @@
  * Option pour sélectionner le mois
  * Option pour sélectionner l'année
  * Lors du clic sur une date, renvoie la date cliquée via un callback.
+ * 
+ * TODO :
+ *  - Ajout d'un bouton "Aujourd'hui" pour revenir au mois actuel si inf et sup.
+ *  - Ajout d'un bouton pour commencer la semaine le lundi au lieu du dimanche.
  */
 
 import React, { useState, useEffect } from 'react';
@@ -298,6 +302,5 @@ export default function Calendar({ interval, getData }) {
 
 // Propriétés par défaut.
 Calendar.defaultProps = {
-  //interval: [new Date().getFullYear()]
-  interval: [2020, 2025],
+  interval: [new Date().getFullYear()]
 };
